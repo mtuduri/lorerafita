@@ -1,0 +1,547 @@
+.flight-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.flight-info-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.flight-header {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.flight-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.status-indicator {
+  font-size: 1.2rem;
+}
+
+.status-text {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.flight-title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.flight-details {
+  padding: 40px;
+}
+
+.route-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.departure, .arrival {
+  text-align: center;
+  flex: 1;
+}
+
+.location-code {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 2px;
+}
+
+.location-name {
+  font-size: 1.2rem;
+  color: #374151;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.time {
+  font-size: 1.1rem;
+  color: #6b7280;
+  font-weight: bold;
+}
+
+.flight-path {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 0 30px;
+}
+
+.flight-line {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #3b82f6, #1e3a8a);
+  border-radius: 2px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.plane-icon {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.flight-duration {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.wedding-details {
+  margin-bottom: 40px;
+}
+
+.details-title {
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 1px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 15px;
+  border-left: 4px solid #3b82f6;
+  transition: transform 0.2s ease;
+}
+
+.detail-item:hover {
+  transform: translateY(-2px);
+}
+
+.detail-icon {
+  font-size: 2rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.detail-content {
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.special-notes {
+  background: #fef7cd;
+  border: 2px solid #f59e0b;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.special-notes h3 {
+  color: #92400e;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.special-notes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.special-notes li {
+  color: #92400e;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.boarding-button {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.boarding-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+}
+
+@media (max-width: 768px) {
+  .flight-info-container {
+    padding: 10px;
+  }
+  
+  .flight-details {
+    padding: 20px;
+  }
+  
+  .route-section {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .flight-path {
+    margin: 20px 0;
+    transform: rotate(90deg);
+    width: 80px;
+  }
+  
+  .location-code {
+    font-size: 2rem;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .flight-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Directions Link Styles */
+.directions-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.directions-link:hover {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+}
+
+.venue-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.directions-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.directions-link:hover .directions-hint {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.directions-icon {
+  font-size: 1rem;
+}
+
+/* Bank Transfer Styles */
+.gifts-section {
+  align-items: flex-start;
+}
+
+.gifts-section.full-width {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+}
+
+.bank-transfer-section {
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bank-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #dc2626;
+}
+
+.bank-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bank-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #dc2626;
+}
+
+.transfer-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transfer-option {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 4px solid #dc2626;
+}
+
+.transfer-option h4 {
+  margin: 0 0 12px 0;
+  color: #374151;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.account-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.account-value {
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.account-value-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-number {
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+}
+
+.copy-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.copy-btn.copied {
+  background: #10b981;
+  animation: copySuccess 0.3s ease;
+}
+
+@keyframes copySuccess {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Mobile responsiveness for bank section */
+@media (max-width: 768px) {
+  .gifts-section.full-width {
+    margin: 15px -20px 0 -20px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 20px;
+  }
+  
+  .bank-transfer-section {
+    padding: 20px;
+    margin: 15px -20px 0 -20px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .bank-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+  
+  .bank-logo {
+    height: 36px;
+  }
+  
+  .bank-name {
+    font-size: 1.4rem;
+  }
+  
+  .transfer-options {
+    gap: 25px;
+  }
+  
+  .transfer-option {
+    padding: 20px;
+    margin: 0 -10px;
+  }
+  
+  .transfer-option h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .account-info {
+    gap: 12px;
+  }
+  
+  .account-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  
+  .account-label {
+    font-size: 1rem;
+    text-align: center;
+    min-width: auto;
+  }
+  
+  .account-value {
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  
+  .account-value-container {
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .account-number {
+    flex: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    max-width: 200px;
+  }
+  
+  .copy-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  /* Mobile directions link styles */
+  .directions-link {
+    padding: 16px;
+  }
+  
+  .venue-name {
+    font-size: 1.2rem;
+  }
+  
+  .directions-hint {
+    font-size: 0.9rem;
+  }
+}

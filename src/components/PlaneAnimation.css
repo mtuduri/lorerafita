@@ -1,0 +1,54 @@
+.plane-animation-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: linear-gradient(135deg, #87CEEB 0%, #4169E1 50%, #1E3A8A 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.plane {
+  position: absolute;
+  font-size: 4rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+  z-index: 1001;
+}
+
+.welcome-message {
+  text-align: center;
+  color: white;
+  z-index: 1002;
+}
+
+.welcome-message h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+.welcome-message p {
+  font-size: 1.2rem;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .plane {
+    font-size: 3rem;
+  }
+  
+  .welcome-message h1 {
+    font-size: 2rem;
+  }
+  
+  .welcome-message p {
+    font-size: 1rem;
+  }
+}

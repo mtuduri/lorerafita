@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #87CEEB 0%, #4169E1 50%, #1E3A8A 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.airline-font {
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 2px;
+}
+
+.clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  opacity: 0.6;
+}
+
+.cloud:before,
+.cloud:after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+}
+
+.cloud1 {
+  width: 100px;
+  height: 40px;
+  top: 20%;
+  left: 10%;
+  animation: float 20s infinite linear;
+}
+
+.cloud2 {
+  width: 80px;
+  height: 30px;
+  top: 40%;
+  left: 70%;
+  animation: float 25s infinite linear;
+}
+
+.cloud3 {
+  width: 120px;
+  height: 50px;
+  top: 60%;
+  left: 30%;
+  animation: float 30s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
