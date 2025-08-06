@@ -20,6 +20,19 @@ const SeatSelection = () => {
   const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
   const seatsPerRow = 6
 
+  // Generate occupied seats once and keep them stable
+  const [occupiedSeats] = useState(() => {
+    const occupied = new Set()
+    rows.forEach(row => {
+      for (let seatNum = 1; seatNum <= 6; seatNum++) {
+        if (Math.random() < 0.3) { // 30% chance of being occupied
+          occupied.add(`${row}${seatNum}`)
+        }
+      }
+    })
+    return occupied
+  })
+
   const handleSeatClick = (seatId) => {
     if (selectedSeats.includes(seatId)) {
       setSelectedSeats(selectedSeats.filter(seat => seat !== seatId))
@@ -235,7 +248,7 @@ const SeatSelection = () => {
                   {[1, 2, 3].map(seatNum => {
                     const seatId = `${row}${seatNum}`
                     const isSelected = selectedSeats.includes(seatId)
-                    const isOccupied = Math.random() < 0.3 // 30% chance of being occupied
+                    const isOccupied = occupiedSeats.has(seatId)
                     
                     return (
                       <motion.button
@@ -256,7 +269,7 @@ const SeatSelection = () => {
                   {[4, 5, 6].map(seatNum => {
                     const seatId = `${row}${seatNum}`
                     const isSelected = selectedSeats.includes(seatId)
-                    const isOccupied = Math.random() < 0.3
+                    const isOccupied = occupiedSeats.has(seatId)
                     
                     return (
                       <motion.button
