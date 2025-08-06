@@ -4,6 +4,7 @@ import BoardingPass from './components/BoardingPass'
 import FlightInfo from './components/FlightInfo'
 import SeatSelection from './components/SeatSelection'
 import PlaneAnimation from './components/PlaneAnimation'
+import BackgroundAudio from './components/BackgroundAudio'
 import './App.css'
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
 
   return (
     <div className="app">
+      <BackgroundAudio />
+      
       <div className="clouds">
         <div className="cloud cloud1"></div>
         <div className="cloud cloud2"></div>
