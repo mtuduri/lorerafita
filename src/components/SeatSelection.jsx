@@ -12,6 +12,9 @@ const SeatSelection = () => {
     guests: 1
   })
   const [showThankYou, setShowThankYou] = useState(false)
+  const [bookingData, setBookingData] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [emailError, setEmailError] = useState('')
 
   // Create seat map (6 seats per row, 10 rows)
   const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
@@ -38,10 +41,85 @@ const SeatSelection = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+
+
+  // Save to local storage
+  const saveToLocalStorage = (data) => {
+    const bookings = JSON.parse(localStorage.getItem('ada2024-bookings') || '[]')
+    const newBooking = {
+      ...data,
+      id: Date.now(),
+      timestamp: new Date().toISOString(),
+      confirmationNumber: `ADA${Date.now().toString().slice(-6)}`
+    }
+    bookings.push(newBooking)
+    localStorage.setItem('ada2024-bookings', JSON.stringify(bookings))
+    return newBooking
+  }
+
+  // Send email via backend
+  const sendEmailViaBackend = async (bookingData) => {
+    try {
+      const response = await fetch('http://localhost:3001/send-confirmation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: guestInfo.name,
+          email: guestInfo.email,
+          selectedSeats,
+          guests: guestInfo.guests,
+          phone: guestInfo.phone,
+          dietary: guestInfo.dietary,
+          confirmationNumber: bookingData.confirmationNumber
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
+
+      return result;
+    } catch (error) {
+      console.error('Backend email error:', error);
+      throw error;
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (selectedSeats.length === parseInt(guestInfo.guests)) {
-      setShowThankYou(true)
+      setIsSubmitting(true)
+      setEmailError('')
+
+      try {
+        // Save booking data locally first
+        const booking = saveToLocalStorage({
+          ...guestInfo,
+          selectedSeats,
+          flightNumber: 'ADA2024'
+        })
+        
+        setBookingData(booking)
+
+        // Send email via backend
+        try {
+          await sendEmailViaBackend(booking)
+          console.log('Email sent successfully via backend')
+        } catch (emailError) {
+          console.log('Backend email failed:', emailError.message)
+          setEmailError('No se pudo enviar el email de confirmación. Por favor, contacta al +598 96 109 982 para confirmar tu reserva.')
+        }
+
+        setShowThankYou(true)
+      } catch (error) {
+        setEmailError('Error al procesar la reserva. Por favor, intenta nuevamente.')
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -71,11 +149,44 @@ const SeatSelection = () => {
           <h1>¡Gracias por confirmar!</h1>
           <p>Tu reserva ha sido confirmada para el vuelo ADA2024</p>
           <div className="confirmation-details">
+            <p><strong>Número de confirmación:</strong> {bookingData?.confirmationNumber}</p>
             <p><strong>Pasajero:</strong> {guestInfo.name}</p>
             <p><strong>Asientos:</strong> {selectedSeats.join(', ')}</p>
             <p><strong>Número de invitados:</strong> {guestInfo.guests}</p>
+            <p><strong>Email:</strong> {guestInfo.email}</p>
+            {!emailError && (
+              <p style={{ color: '#27ae60', fontWeight: 'bold' }}>
+                ✅ Email de confirmación enviado automáticamente
+              </p>
+            )}
           </div>
-          <p className="final-message">¡Nos vemos a bordo! 🎉</p>
+          
+          {emailError && (
+            <div style={{ 
+              backgroundColor: '#fdf2f2', 
+              border: '1px solid #e74c3c', 
+              borderRadius: '8px', 
+              padding: '1.5rem', 
+              margin: '1rem 0',
+              color: '#c0392b',
+              textAlign: 'center'
+            }}>
+              <p style={{ fontSize: '18px', marginBottom: '0.5rem' }}>⚠️ <strong>Error al enviar email</strong></p>
+              <p style={{ marginBottom: '1rem' }}>{emailError}</p>
+              <div style={{ 
+                backgroundColor: '#27ae60', 
+                color: 'white', 
+                padding: '12px', 
+                borderRadius: '6px',
+                fontSize: '18px',
+                fontWeight: 'bold'
+              }}>
+                📞 Contactar: +598 96 109 982
+              </div>
+            </div>
+          )}
+          
+          <p className="final-message" style={{ marginTop: '2rem' }}>¡Nos vemos a bordo! 🎉</p>
         </div>
       </motion.div>
     )
@@ -249,14 +360,28 @@ const SeatSelection = () => {
                 </p>
               </div>
 
+              {emailError && (
+                <div className="error-message" style={{ color: '#e74c3c', marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#fdf2f2', border: '1px solid #e74c3c', borderRadius: '4px' }}>
+                  {emailError}
+                </div>
+              )}
+
               <motion.button
                 type="submit"
                 className="confirm-button"
-                disabled={selectedSeats.length !== parseInt(guestInfo.guests) || !guestInfo.name || !guestInfo.email}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                disabled={selectedSeats.length !== parseInt(guestInfo.guests) || !guestInfo.name || !guestInfo.email || isSubmitting}
+                whileHover={!isSubmitting ? { scale: 1.05 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.95 } : {}}
+                style={{ opacity: isSubmitting ? 0.7 : 1 }}
               >
-                CONFIRMAR RESERVA ✈️
+                {isSubmitting ? (
+                  <>
+                    <span style={{ marginRight: '0.5rem' }}>📧</span>
+                    ENVIANDO CONFIRMACIÓN...
+                  </>
+                ) : (
+                  'CONFIRMAR RESERVA ✈️'
+                )}
               </motion.button>
             </form>
           </motion.div>
