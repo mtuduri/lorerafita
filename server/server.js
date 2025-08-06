@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -9,9 +10,14 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'], // Vite dev server ports
+  origin: process.env.NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL] 
+    : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true
 }));
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Create Gmail transporter
 const createTransporter = () => {
@@ -187,6 +193,11 @@ const testEmailConfig = () => {
   console.log('✅ Email configuration looks good');
   return true;
 };
+
+// Catch-all handler: send back React's index.html file for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 // Start server
 app.listen(PORT, () => {
