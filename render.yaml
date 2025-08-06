@@ -3,8 +3,8 @@ services:
     name: wedding-airline-invitation
     env: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
     envVars:
       - key: NODE_ENV
         value: production
@@ -13,4 +13,4 @@ services:
       - key: GMAIL_APP_PASSWORD
         sync: false
       - key: SENDER_NAME
-        value: Wedding ADA2024
+        value: "Lorena&Rafael"
