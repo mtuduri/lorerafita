@@ -73,7 +73,11 @@ const SeatSelection = () => {
   // Send email via backend
   const sendEmailViaBackend = async (bookingData) => {
     try {
-      const response = await fetch('http://localhost:3001/send-confirmation', {
+      const apiUrl = process.env.NODE_ENV === 'production' 
+        ? '/send-confirmation' 
+        : 'http://localhost:3001/send-confirmation';
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
