@@ -250,6 +250,22 @@
   margin-bottom: 30px;
 }
 
+.pilots-image-container {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pilots-wedding-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 3px solid #f8fafc;
+}
+
 .thank-you-card h1 {
   color: #1e3a8a;
   font-size: 2.5rem;
@@ -329,5 +345,9 @@
   
   .thank-you-card h1 {
     font-size: 2rem;
+  }
+  
+  .pilots-wedding-image {
+    max-width: 250px;
   }
 }

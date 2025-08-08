@@ -163,6 +163,20 @@ const SeatSelection = () => {
           >
             ✈️💕
           </motion.div>
+          
+          <motion.div 
+            className="pilots-image-container"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            <img 
+              src="/pilots.PNG" 
+              alt="Pilots Wedding" 
+              className="pilots-wedding-image"
+            />
+          </motion.div>
+          
           <h1>¡Gracias por confirmar!</h1>
           <p>Tu reserva ha sido confirmada para el vuelo ADA2024</p>
           <div className="confirmation-details">
