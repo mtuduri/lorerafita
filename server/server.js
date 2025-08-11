@@ -138,7 +138,7 @@ app.post('/send-confirmation', async (req, res) => {
     // Email options
     const mailOptions = {
       from: `"${process.env.SENDER_NAME || 'Wedding ADA2024'}" <${process.env.GMAIL_USER}>`,
-      to: 'inmobiliaria1920@gmail.com',
+      to: 'Inmobiliaria2910@gmail.com',
       subject: `✈️ Confirmación de Reserva - Vuelo ADA2024 (${confirmationNumber})`,
       html: createEmailHTML({
         name,
